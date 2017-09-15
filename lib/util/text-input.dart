@@ -10,6 +10,7 @@ class TextInputBuilder extends StatelessWidget  {
 
   final TextEditingController _textController = new TextEditingController();
 
+  @override
   Widget build(BuildContext context) {
     return new IconTheme(
       data: new IconThemeData(color: Theme.of(context).accentColor),

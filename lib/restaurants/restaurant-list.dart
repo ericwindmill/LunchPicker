@@ -12,7 +12,7 @@ class RestaurantList extends StatelessWidget {
         children: <Widget>[
           new Flexible(
             child: new ListView.builder(
-              itemBuilder: (_, int index) => new Text(restaurants[index]),
+              itemBuilder: (_, int index) => restaurants[index],
               itemCount: restaurants.length,
             ),
           ),

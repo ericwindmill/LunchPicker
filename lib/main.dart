@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'restaurants/restaurant-list.dart';
+import 'restaurants/restaurant-detail.dart';
 import 'util/text-input.dart';
 
 void main() {
@@ -22,11 +23,11 @@ class VoteScreen extends StatefulWidget {
 }
 
 class VoteScreenState extends State<VoteScreen> {
-  List restaurants = [];
+  final List<RestaurantDetail> _restaurants = <RestaurantDetail>[];
 
   handleSubmit(String text) {
     setState(() {
-      restaurants.insert(0, text);
+      _restaurants.insert(0, new RestaurantDetail(text));
     });
   }
 
@@ -35,12 +36,12 @@ class VoteScreenState extends State<VoteScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text('Lunch Picker App')
+        title: new Text('Lunch Picker')
       ),
       body: new Column(
         children: <Widget>[
           new Flexible(
-            child: new RestaurantList(restaurants),
+            child: new RestaurantList(_restaurants),
           ),
           new Divider(height: 1.0),
           new Container(
