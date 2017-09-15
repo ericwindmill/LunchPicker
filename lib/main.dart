@@ -22,7 +22,14 @@ class VoteScreen extends StatefulWidget {
 }
 
 class VoteScreenState extends State<VoteScreen> {
-  List restaurants = ['Tour Normand', 'Farmhouse', 'Liho Liho'];
+  List restaurants = [];
+
+  handleSubmit(String text) {
+    setState(() {
+      restaurants.insert(0, text);
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +46,7 @@ class VoteScreenState extends State<VoteScreen> {
           new Container(
             decoration: new BoxDecoration(
               color: Theme.of(context).cardColor),
-              child: new TextInputBuilder(restaurants),
+              child: new TextInputBuilder(handleSubmit),
           ),
         ],
       ),

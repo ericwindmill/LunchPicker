@@ -5,16 +5,10 @@ The widget itself provides a text input feild and an input icon.
 There is also a _handleSubmit function, which is used to add the users input to the List that's passed in. In this case, the List is a list of restaurants which the team will vote on for lunch.
 */
 class TextInputBuilder extends StatelessWidget  {
-  TextInputBuilder(this.items);
-  final List items;
+  TextInputBuilder(this.handleSubmit);
+  final handleSubmit;
 
   final TextEditingController _textController = new TextEditingController();
-
-  _handleSubmit(String text) {
-    _textController.clear();
-    String entry = text;
-    items.insert(0, entry);
-  }
 
   Widget build(BuildContext context) {
     return new IconTheme(
@@ -26,7 +20,7 @@ class TextInputBuilder extends StatelessWidget  {
             new Flexible(
               child: new TextField(
                 controller: _textController,
-                onSubmitted: _handleSubmit,
+                onSubmitted: handleSubmit,
                 decoration: new InputDecoration.collapsed(
                   hintText: 'Suggest a Restaurant'
                 ),
@@ -36,7 +30,8 @@ class TextInputBuilder extends StatelessWidget  {
                 margin: new EdgeInsets.symmetric(horizontal: 4.0),
                 child: new IconButton(
                   icon: new Icon(Icons.send),
-                  onPressed: () => _handleSubmit(_textController.text)),
+                  onPressed: () => handleSubmit(_textController.text)
+                ),
               ),
           ],
         ),
