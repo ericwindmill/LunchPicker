@@ -25,11 +25,30 @@ class VoteScreen extends StatefulWidget {
 class VoteScreenState extends State<VoteScreen> {
   final List<RestaurantDetail> _restaurants = <RestaurantDetail>[];
 
-  handleSubmit(String text) {
+  handleVote(key) { // this.name
+    // This breaks if there are two restaurants with the same name.
+    // But that should never happen so it's okay.
+    var currentRestaurant = _restaurants.firstWhere(
+      (restaurant) => restaurant.name == key, 
+      orElse: () => null
+    );
+
+    // Grab the position so that you can replace Restaurant Detail.
+    int position = _restaurants.indexOf(currentRestaurant);
     setState(() {
-      _restaurants.insert(0, new RestaurantDetail(text));
+      _restaurants[position] = new RestaurantDetail(
+        currentRestaurant.name, 
+        currentRestaurant.vote + 1,
+        handleVote);
     });
   }
+
+  handleSubmit(String text) {
+    setState(() {
+      _restaurants.insert(0, new RestaurantDetail(text, 1, handleVote));
+    });
+  }
+  
 
 
   @override
